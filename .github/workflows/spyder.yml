@@ -1,0 +1,32 @@
+name: Run Spider Crawler
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # 每天午夜12點觸發
+  workflow_dispatch:  # 也可以手動觸發
+    inputs:
+      trigger:
+        description: 'Manual Trigger'
+        required: true
+        default: 'Yes'
+
+jobs:
+  run_crawler:
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.x'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+
+    - name: Run Spider Crawler
+      run: |
+        python static.py  # 執行你的爬蟲程式
