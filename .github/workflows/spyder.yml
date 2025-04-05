@@ -19,7 +19,9 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install Python Dependency
-        run: pip3 install requests beautifulsoup4
+        run: 
+          pip3 install requests 
+          pip3 install beautifulsoup4
       - name: Run static.py  # 前面都是在安裝 Python 環境，這裡才是真的去執行 crawler.py 的程式
         run:
           python static.py
