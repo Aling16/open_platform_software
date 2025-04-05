@@ -27,11 +27,11 @@ jobs:
     - name: Run api.py
       run: python3 api.py
 
-    - name: Upload results
-      uses: actions/upload-artifact@v3.1.3
-      with:
-        name: crawler-results
-        path: |
-          static.csv
-          static.json
-          api.csv  # ← 注意你的 api.py 是輸出這個，不是 api.csv
+    # - name: Upload results
+    #   uses: actions/upload-artifact@v3.1.3
+    #   with:
+    #     name: crawler-results
+    #     path: |
+    #       static.csv
+    #       static.json
+    #       api.csv 
