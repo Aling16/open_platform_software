@@ -33,4 +33,5 @@ jobs:
         name: crawler-results
         path: |
           static.csv
+          static.json
           api.csv
