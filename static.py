@@ -49,39 +49,39 @@
 # print("✅ 匯率資料已成功輸出到 static.json 和 static.csv")
 
 
-# static.py
-import requests
-import csv
+# # static.py
+# import requests
+# import csv
 
-def run():
-    url = "https://restcountries.com/v3.1/all"
-    response = requests.get(url)
-    countries = response.json()
-    data_list = []
+# def run():
+#     url = "https://restcountries.com/v3.1/all"
+#     response = requests.get(url)
+#     countries = response.json()
+#     data_list = []
 
-    for country in countries:
-        name = country.get("name", {}).get("common", "N/A")
-        capital = country.get("capital", ["N/A"])[0]
-        population = country.get("population", 0)
-        area = country.get("area", 0)
-        timezones = ", ".join(country.get("timezones", []))
-        flag = country.get("flags", {}).get("png", "N/A")
+#     for country in countries:
+#         name = country.get("name", {}).get("common", "N/A")
+#         capital = country.get("capital", ["N/A"])[0]
+#         population = country.get("population", 0)
+#         area = country.get("area", 0)
+#         timezones = ", ".join(country.get("timezones", []))
+#         flag = country.get("flags", {}).get("png", "N/A")
 
-        data_list.append({
-            "國家": name,
-            "首都": capital,
-            "人口": population,
-            "面積(km²)": area,
-            "時區": timezones,
-            "國旗圖片": flag
-        })
+#         data_list.append({
+#             "國家": name,
+#             "首都": capital,
+#             "人口": population,
+#             "面積(km²)": area,
+#             "時區": timezones,
+#             "國旗圖片": flag
+#         })
 
-    with open("countries.csv", "w", newline="", encoding="utf-8-sig") as f:
-        fieldnames = ["國家", "首都", "人口", "面積(km²)", "時區", "國旗圖片"]
-        writer = csv.DictWriter(f, fieldnames=fieldnames)
-        writer.writeheader()
-        writer.writerows(data_list)
+#     with open("countries.csv", "w", newline="", encoding="utf-8-sig") as f:
+#         fieldnames = ["國家", "首都", "人口", "面積(km²)", "時區", "國旗圖片"]
+#         writer = csv.DictWriter(f, fieldnames=fieldnames)
+#         writer.writeheader()
+#         writer.writerows(data_list)
 
-if __name__ == "__main__":
-    run()
+# if __name__ == "__main__":
+#     run()
 
