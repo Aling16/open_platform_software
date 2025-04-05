@@ -33,7 +33,7 @@ for country in countries:
     })
 
 # 6. 寫入 CSV 檔案
-with open("countries.csv", "w", newline="", encoding="utf-8-sig") as f:
+with open("api.csv", "w", newline="", encoding="utf-8-sig") as f:
     fieldnames = ["國家", "首都", "人口", "面積(km²)", "時區", "國旗圖片"]
     writer = csv.DictWriter(f, fieldnames=fieldnames)
     writer.writeheader()
