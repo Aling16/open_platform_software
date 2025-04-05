@@ -1,48 +1,76 @@
-name: Daily Country Crawler
+name: Crawler Demo Action
+run-name: Crawler Demo Action
 
+# 觸發此 action 的時機
 on:
   schedule:
-    - cron: '0 12 * * *'  # 每天中午 12:00 (UTC)，台灣時間 20:00
-  workflow_dispatch:      # 支援手動觸發
+    - cron: "55 12 * * *"  # UTC 每天下午 12:55 執行此 action（等同於台灣晚上 8:55 執行）
+  workflow_dispatch:  # 可以手動執行此 action
 
+# 預先定義此 action 要幹嘛
 jobs:
-  run-crawlers:
+  crawler-demo:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Setup Python
+        uses: actions/setup-python@v4.5.0
+        with:
+          python-version: "3.10"
+      - name: Install Python Dependency
+        run: pip3 install requests beautifulsoup4
+      - name: Run static.py  # 前面都是在安裝 Python 環境，這裡才是真的去執行 crawler.py 的程式
+        run:
+          python static.py
+          python api.py
+      - name: Commit Data Back To GitHub Repo  # 將爬到的數據 commit 回 GitHub repo
+        run: |
+          git config --global user.name "aling"
+          git config --global user.email "tfamy921016@gmail.com"
+          git add . && git commit -m "daily crawl"
+          git push origin main
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
+# name: Daily Country Crawler
 
-    - name: Install dependencies
-      run: pip install requests beautifulsoup4
+# on:
+#   schedule:
+#     - cron: '0 12 * * *'  # 每天中午 12:00 (UTC)，台灣時間 20:00
+#   workflow_dispatch:      # 支援手動觸發
 
-    - name: Run static.py
-      run: |
-        python3 static.py
-        echo "static.py executed"
+# jobs:
+#   run-crawlers:
+#     runs-on: ubuntu-latest
 
-    - name: Run api.py
-      run: |
-        python3 api.py
-        echo "api.py executed"
+#     steps:
+#     - name: Checkout code
+#       uses: actions/checkout@v3
+
+#     - name: Set up Python
+#       uses: actions/setup-python@v4
+#       with:
+#         python-version: '3.11'
+
+#     - name: Install dependencies
+#       run: pip install requests beautifulsoup4
+
+#     - name: Run static.py
+#       run: |
+#         python3 static.py
+#         echo "static.py executed"
+
+#     - name: Run api.py
+#       run: |
+#         python3 api.py
+#         echo "api.py executed"
         
-    - name: Upload results
-      uses: actions/upload-artifact@v2
-      with:
-        name: crawler-results
-        path: |
-          static.csv
-          static.json
-          api.csv
-
-    # -name: Commit Data Back To GitHub Repo  # 將爬到的數據 commit 回 GitHub repo
-    #   run: |
-    #     git config --global user.name "crawler-bot"
-    #     git config --global user.email "crawler-bot@gmail.com"
+#     - name: Upload results
+#       uses: actions/upload-artifact@v2
+#       with:
+#         name: crawler-results
+#         path: |
+#           static.csv
+#           static.json
+#           api.csv
     #     git add . && git commit -m "daily crawl"
     #     git push origin main
