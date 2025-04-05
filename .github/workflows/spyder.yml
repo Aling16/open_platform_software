@@ -34,4 +34,4 @@ jobs:
         path: |
           static.csv
           static.json
-          api .csv  # ← 注意你的 api.py 是輸出這個，不是 api.csv
+          api.csv  # ← 注意你的 api.py 是輸出這個，不是 api.csv
