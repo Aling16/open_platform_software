@@ -6,7 +6,7 @@ on:
   workflow_dispatch:      # 手動觸發支援
 
 jobs:
-  run-crawler:
+  run-crawlers:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,11 +21,16 @@ jobs:
     - name: Install dependencies
       run: pip install requests
 
-    - name: Run static
+    - name: Run static.py
       run: python static.py
 
-    - name: Upload countries.csv as artifact
+    - name: Run api.py
+      run: python api.py
+
+    - name: Upload CSV results
       uses: actions/upload-artifact@v3
       with:
-        name: static-csv
-        path: static.csv
+        name: crawler-results
+        path: |
+          static.csv
+          api.csv
