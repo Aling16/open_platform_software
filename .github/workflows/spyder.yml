@@ -1,32 +1,31 @@
-name: Run Spider Crawler
+name: Daily Country Crawler
 
 on:
   schedule:
-    - cron: '0 0 * * *'  # 每天午夜12點觸發
-  workflow_dispatch:  # 也可以手動觸發
-    inputs:
-      trigger:
-        description: 'Manual Trigger'
-        required: true
-        default: 'Yes'
+    - cron: '0 12 * * *'  # 每天中午 12:00 (UTC)，台灣時間 20:00
+  workflow_dispatch:      # 手動觸發支援
 
 jobs:
-  run_crawler:
+  run-crawler:
     runs-on: ubuntu-latest
-    
+
     steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Set up Python
-      uses: actions/setup-python@v2
+      uses: actions/setup-python@v4
       with:
-        python-version: '3.x'
+        python-version: '3.10'
 
     - name: Install dependencies
-      run: |
-        pip install -r requirements.txt
+      run: pip install requests
 
-    - name: Run Spider Crawler
-      run: |
-        python static.py  # 執行你的爬蟲程式
+    - name: Run static
+      run: python static.py
+
+    - name: Upload countries.csv as artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: static-csv
+        path: static.csv
