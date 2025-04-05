@@ -28,7 +28,7 @@ jobs:
           python api.py
       - name: Commit Data Back To GitHub Repo  # 將爬到的數據 commit 回 GitHub repo
         run: |
-          git config --global user.name "tfamy921016"
+          git config --global user.name "Aling"
           git config --global user.email "tfamy921016@gmail.com"
           git add . && git commit -m "daily crawl"
           git push origin main
