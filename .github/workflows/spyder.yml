@@ -19,11 +19,11 @@ jobs:
         with:
           python-version: "3.10"
       - name: Install Python Dependency
-        run: 
+        run: |
           pip3 install requests 
           pip3 install beautifulsoup4
       - name: Run static.py  # 前面都是在安裝 Python 環境，這裡才是真的去執行 crawler.py 的程式
-        run:
+        run: |
           python static.py
           python api.py
       - name: Commit Data Back To GitHub Repo  # 將爬到的數據 commit 回 GitHub repo
