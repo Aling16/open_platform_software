@@ -22,10 +22,10 @@ jobs:
       run: pip install requests
 
     - name: Run static.py
-      run: python static.py
+      run: python3 static.py
 
     - name: Run api.py
-      run: python api.py
+      run: python3 api.py
 
     - name: Upload CSV results
       uses: actions/upload-artifact@v2
