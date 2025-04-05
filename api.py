@@ -18,12 +18,12 @@ def run():
         })
     
     # 4. 輸出為 CSV 檔案
-    with open("jp_holidays.csv", "w", newline="", encoding="utf-8-sig") as f:
+    with open("api.csv", "w", newline="", encoding="utf-8-sig") as f:
         writer = csv.DictWriter(f, fieldnames=["日期", "節日名稱"])
         writer.writeheader()
         writer.writerows(holiday_list)
     
-    # print("✅ 日本國定假日資料已成功寫入 jp_holidays.csv")
+    # print("✅ 日本國定假日資料已成功寫入 api.csv")
 
 if __name__ == "__main__":
     run()
