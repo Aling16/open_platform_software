@@ -19,7 +19,7 @@ jobs:
         python-version: '3.11.9'
 
     - name: Install dependencies
-      run: pip install requests
+      run: pip install requests beautifulsoup4
 
     - name: Run static.py
       run: python3 static.py
@@ -27,11 +27,11 @@ jobs:
     - name: Run api.py
       run: python3 api.py
 
-    - name: Upload CSV results
-      uses: actions/upload-artifact@v2
+    - name: Upload results
+      uses: actions/upload-artifact@v3
       with:
         name: crawler-results
         path: |
           static.csv
           static.json
-          api.csv
+          api .csv  # ← 注意你的 api.py 是輸出這個，不是 api.csv
